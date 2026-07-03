@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrevista por Competências — Social Media Sênior · Rankey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#050f0a;
+    --bg-1:#0b1c14;
+    --bg-2:#122a1f;
+    --card-border:rgba(255,255,255,0.07);
+    --green:#5EFFA0;
+    --green-dim:#1f5c3c;
+    --green-soft:rgba(94,255,160,0.12);
+    --red:#FF5C5C;
+    --red-soft:rgba(255,92,92,0.12);
+    --text:#EAF5EE;
+    --text-muted:#8DA79A;
+    --amber:#FFC15E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(94,255,160,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 20%, rgba(94,255,160,0.05), transparent 60%),
+      var(--bg-0);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+    padding-bottom:120px;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Header ---------- */
+  .topbar{
+    padding:36px 0 20px;
+    border-bottom:1px solid var(--card-border);
+    margin-bottom:32px;
+  }
+  .eyebrow{
+    color:var(--green);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+  h1{font-size:30px;font-weight:700;margin:0 0 6px;letter-spacing:-0.01em;}
+  .subtitle{color:var(--text-muted);font-size:14.5px;margin:0;}
+
+  .meta-row{
+    display:flex;gap:14px;margin-top:22px;flex-wrap:wrap;
+  }
+  .meta-field{flex:1;min-width:180px;}
+  .meta-field label{display:block;font-size:11.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:600;}
+  .meta-field input{
+    width:100%;background:var(--bg-1);border:1px solid var(--card-border);
+    color:var(--text);padding:10px 12px;border-radius:8px;font-family:inherit;font-size:14px;
+  }
+  .meta-field input:focus{outline:none;border-color:var(--green-dim);}
+
+  /* ---------- Start gate ---------- */
+  #startGate{
+    background:var(--bg-1);border:1px solid var(--card-border);border-radius:14px;
+    padding:22px 24px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  #startGate p{margin:0;color:var(--text-muted);font-size:13.5px;max-width:420px;}
+  .btn{
+    border:none;border-radius:9px;padding:13px 22px;font-family:inherit;font-weight:700;
+    font-size:14px;cursor:pointer;transition:transform .12s ease, opacity .12s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--green);color:#04140b;}
+  .btn-primary:hover{opacity:.9;}
+  .btn-primary:disabled{background:var(--bg-2);color:var(--text-muted);cursor:not-allowed;}
+  .btn-ghost{background:transparent;border:1px solid var(--card-border);color:var(--text-muted);}
+  .btn-ghost:hover{border-color:var(--green-dim);color:var(--text);}
+
+  /* ---------- Fixed clock ---------- */
+  #clockWidget{
+    position:fixed;top:18px;right:18px;z-index:50;
+    background:rgba(11,28,20,0.92);backdrop-filter:blur(8px);
+    border:1px solid var(--card-border);border-radius:16px;
+    padding:12px 16px;text-align:center;min-width:132px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.4);
+    opacity:0;pointer-events:none;transform:translateY(-8px);
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  #clockWidget.active{opacity:1;pointer-events:auto;transform:translateY(0);}
+  #clockWidget .ring{
+    width:14px;height:14px;border-radius:50%;
+    background:var(--green);margin:0 auto 6px;
+    box-shadow:0 0 0 0 rgba(94,255,160,0.6);
+    animation:pulse 1.6s infinite;
+  }
+  #clockWidget.flash .ring{animation:flash .4s ease;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(94,255,160,0.55);}
+    70%{box-shadow:0 0 0 10px rgba(94,255,160,0);}
+    100%{box-shadow:0 0 0 0 rgba(94,255,160,0);}
+  }
+  @keyframes flash{
+    0%{background:var(--amber);}
+    100%{background:var(--green);}
+  }
+  #clockWidget .time{font-family:'Space Grotesk';font-size:26px;font-weight:700;letter-spacing:.02em;}
+  #clockWidget .label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+  #clockWidget .total{font-size:11px;color:var(--text-muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--card-border);}
+  #clockWidget .total b{color:var(--text);font-weight:600;}
+  #clockWidget .progress{font-size:11px;color:var(--green);margin-top:4px;font-weight:600;}
+
+  /* ---------- Blocks ---------- */
+  .block-header{
+    display:flex;align-items:baseline;gap:10px;margin:44px 0 18px;
+  }
+  .block-header h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-weight:700;margin:0;}
+  .block-bar{height:3px;flex:1;background:linear-gradient(90deg,var(--green-dim),transparent);border-radius:2px;}
+  .block-header.behavioral .block-bar{background:linear-gradient(90deg,#4a7cff33,transparent);}
+
+  fieldset{border:none;margin:0;padding:0;opacity:1;transition:opacity .3s ease;}
+  fieldset[disabled]{opacity:.35;pointer-events:none;}
+
+  /* ---------- Question card ---------- */
+  .qcard{
+    background:var(--bg-1);border:1px solid var(--card-border);border-radius:14px;
+    padding:22px 22px 18px;margin-bottom:16px;
+    transition:border-color .2s ease;
+  }
+  .qcard.answered{border-color:var(--green-dim);}
+  .qhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+  .qnum{
+    flex-shrink:0;width:28px;height:28px;border-radius:8px;background:var(--bg-2);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
+    color:var(--text-muted);font-family:'Space Grotesk';
+  }
+  .qcard.answered .qnum{background:var(--green-soft);color:var(--green);}
+  .qtitle{font-size:12.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:3px;}
+  .qtext{font-size:15.5px;font-weight:500;color:var(--text);}
+
+  .options{display:grid;gap:8px;margin-top:14px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--bg-2);border:1px solid transparent;border-radius:10px;
+    padding:11px 13px;cursor:pointer;font-size:14px;color:var(--text);
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt:hover{border-color:var(--green-dim);}
+  .opt.selected{background:var(--green-soft);border-color:var(--green);}
+  .opt .letter{
+    flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);
+    display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;
+    color:var(--text-muted);
+  }
+  .opt.selected .letter{background:var(--green);color:#04140b;}
+
+  /* ---------- Footer / finalize ---------- */
+  .finalize-bar{
+    max-width:820px;margin:40px auto 0;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  .progress-text{font-size:13px;color:var(--text-muted);}
+  .progress-text b{color:var(--green);}
+
+  /* ---------- Results ---------- */
+  #results{display:none;margin-top:50px;}
+  #results.show{display:block;}
+  .result-hero{
+    background:linear-gradient(160deg, var(--bg-2), var(--bg-1));
+    border:1px solid var(--card-border);border-radius:18px;padding:32px;text-align:center;margin-bottom:24px;
+  }
+  .result-hero .eyebrow{justify-content:center;}
+  .big-pct{font-family:'Space Grotesk';font-size:64px;font-weight:700;line-height:1;margin:10px 0 6px;}
+  .verdict-tag{
+    display:inline-block;padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;margin-top:8px;
+  }
+  .verdict-strong{background:var(--green-soft);color:var(--green);}
+  .verdict-medium{background:rgba(255,193,94,0.14);color:var(--amber);}
+  .verdict-low{background:var(--red-soft);color:var(--red);}
+
+  .split-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+  .split-card{background:var(--bg-1);border:1px solid var(--card-border);border-radius:14px;padding:20px;}
+  .split-card .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);font-weight:700;margin-bottom:8px;}
+  .split-card .pct{font-family:'Space Grotesk';font-size:34px;font-weight:700;}
+  .bar-track{height:6px;background:var(--bg-2);border-radius:3px;margin-top:10px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:3px;background:var(--green);}
+
+  .narrative{
+    background:var(--bg-1);border:1px solid var(--card-border);border-radius:14px;padding:22px 24px;margin-bottom:18px;
+  }
+  .narrative h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:0 0 10px;}
+  .narrative p{margin:0;font-size:14.5px;color:var(--text);}
+
+  .flags-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
+  .flag-card{background:var(--bg-1);border:1px solid var(--card-border);border-radius:14px;padding:18px 20px;}
+  .flag-card h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;display:flex;align-items:center;gap:7px;}
+  .flag-card.strength h4{color:var(--green);}
+  .flag-card.attention h4{color:var(--red);}
+  .flag-card ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--text-muted);}
+  .flag-card li{margin-bottom:6px;}
+  .flag-card .empty{font-size:13px;color:var(--text-muted);font-style:italic;}
+
+  .time-table{background:var(--bg-1);border:1px solid var(--card-border);border-radius:14px;padding:20px 22px;margin-bottom:18px;}
+  .time-table h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:0 0 12px;}
+  .time-row{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px solid var(--card-border);}
+  .time-row:last-child{border-bottom:none;}
+  .time-row span:first-child{color:var(--text-muted);}
+  .time-row span:last-child{font-family:'Space Grotesk';font-weight:700;}
+  .time-total-row{display:flex;justify-content:space-between;padding-top:12px;margin-top:6px;border-top:1px solid var(--card-border);font-size:14.5px;}
+  .time-total-row span:last-child{font-family:'Space Grotesk';font-weight:700;color:var(--green);font-size:18px;}
+
+  .reset-row{text-align:center;margin-top:26px;}
+
+  @media(max-width:600px){
+    .split-row,.flags-row{grid-template-columns:1fr;}
+    .big-pct{font-size:48px;}
+    #clockWidget{top:auto;bottom:16px;right:16px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="clockWidget">
+  <div class="ring"></div>
+  <div class="time" id="segTime">00:00</div>
+  <div class="label">tempo da pergunta</div>
+  <div class="progress" id="progMini">0/11 respondidas</div>
+  <div class="total">total: <b id="totalTimeMini">00:00</b></div>
+</div>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="eyebrow">Rankey · Processo Seletivo</div>
+    <h1>Entrevista por Competências</h1>
+    <p class="subtitle">Cargo: Social Media Sênior — etapa presencial</p>
+
+    <div class="meta-row">
+      <div class="meta-field">
+        <label>Candidata</label>
+        <input type="text" id="candName" placeholder="Nome da candidata">
+      </div>
+      <div class="meta-field">
+        <label>Entrevistadora</label>
+        <input type="text" id="interviewerName" placeholder="Seu nome">
+      </div>
+      <div class="meta-field">
+        <label>Data</label>
+        <input type="date" id="interviewDate">
+      </div>
+    </div>
+  </div>
+
+  <div id="startGate">
+    <p>O cronômetro fixo só começa a contar quando você iniciar a entrevista. Ele zera a cada resposta marcada, cronometrando o tempo da pergunta seguinte — e o tempo total é somado até a finalização.</p>
+    <button class="btn btn-primary" id="startBtn">Iniciar entrevista</button>
+  </div>
+
+  <fieldset id="questionsFieldset" disabled>
+
+    <div class="block-header">
+      <h2>Competências técnicas</h2>
+      <div class="block-bar"></div>
+    </div>
+    <div id="hardBlock"></div>
+
+    <div class="block-header behavioral">
+      <h2>Competências comportamentais</h2>
+      <div class="block-bar"></div>
+    </div>
+    <div id="behavioralBlock"></div>
+
+  </fieldset>
+
+  <div class="finalize-bar">
+    <div class="progress-text"><b id="progressCount">0</b> de 11 perguntas respondidas</div>
+    <button class="btn btn-primary" id="finalizeBtn" disabled>Ver resultado final</button>
+  </div>
+
+  <div id="results">
+    <div class="result-hero">
+      <div class="eyebrow">Resultado da avaliação</div>
+      <div class="big-pct" id="overallPct">0%</div>
+      <div style="color:var(--text-muted);font-size:13.5px;">Fit geral com o perfil da vaga</div>
+      <div class="verdict-tag" id="verdictTag">—</div>
+    </div>
+
+    <div class="split-row">
+      <div class="split-card">
+        <div class="label">Fit técnico</div>
+        <div class="pct" id="hardPct">0%</div>
+        <div class="bar-track"><div class="bar-fill" id="hardBar" style="width:0%"></div></div>
+      </div>
+      <div class="split-card">
+        <div class="label">Fit comportamental</div>
+        <div class="pct" id="behPct">0%</div>
+        <div class="bar-track"><div class="bar-fill" id="behBar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="narrative">
+      <h3>Leitura do perfil</h3>
+      <p id="narrativeText"></p>
+    </div>
+
+    <div class="flags-row">
+      <div class="flag-card strength">
+        <h4>✓ Pontos fortes observados</h4>
+        <ul id="strengthsList"></ul>
+      </div>
+      <div class="flag-card attention">
+        <h4>⚠ Pontos de atenção</h4>
+        <ul id="attentionList"></ul>
+      </div>
+    </div>
+
+    <div class="time-table">
+      <h3>Tempo por pergunta</h3>
+      <div id="timeRows"></div>
+      <div class="time-total-row"><span>Tempo total da entrevista</span><span id="totalTimeFinal">00:00</span></div>
+    </div>
+
+    <div class="reset-row">
+      <button class="btn btn-ghost" id="resetBtn">Reiniciar para nova candidata</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ---------------- DATA ----------------
+const HARD_QUESTIONS = [
+  {
+    id:'H2', title:'Leitura proativa de dados',
+    text:'Descreva uma situação em que você percebeu, sozinha e antes de qualquer alerta externo, que uma métrica indicava um problema na estratégia. O que fez?',
+    options:[
+      {l:'A', t:'Esperou o gestor perceber e cobrar explicações', s:1},
+      {l:'B', t:'Analisou a causa raiz e já chegou com um plano de correção pronto', s:4},
+      {l:'C', t:'Reportou o problema, mas sem propor solução', s:2},
+      {l:'D', t:'Ignorou porque não fazia parte oficialmente da sua função', s:1}
+    ]
+  },
+  {
+    id:'H4', title:'Aprendizado técnico autônomo',
+    text:'Me dê um exemplo de uma ferramenta de analytics ou IA que você teve que aprender sozinha, sem treinamento, para resolver um problema. Como foi esse processo?',
+    options:[
+      {l:'A', t:'Buscou tutoriais, testou e aplicou rapidamente, sem esperar treinamento', s:4},
+      {l:'B', t:'Aprendeu o básico mas dependeu de terceiros para aprofundar', s:2},
+      {l:'C', t:'Preferiu não usar a ferramenta por falta de treinamento', s:1},
+      {l:'D', t:'Só aprendeu depois de ser cobrada formalmente por isso', s:1}
+    ]
+  },
+  {
+    id:'H5', title:'Desapego técnico por iniciativa própria',
+    text:'Conte sobre um formato de conteúdo que você mesma decidiu descontinuar, com base em dados, antes que alguém pedisse. O que motivou a decisão?',
+    options:[
+      {l:'A', t:'Analisou os números e agiu por conta própria antes de qualquer cobrança', s:4},
+      {l:'B', t:'Só descontinuou depois que o gestor questionou os números', s:2},
+      {l:'C', t:'Manteve o formato mesmo com dados ruins, por apego pessoal', s:1},
+      {l:'D', t:'Descontinuou porque "sentiu" que estava cansativo, sem olhar dados', s:2}
+    ]
+  },
+  {
+    id:'H9', title:'Leitura de relatório nativo para decisão de formato',
+    text:'Descreva uma vez em que você olhou os Insights/Analytics de uma rede e, a partir disso, mudou a decisão de qual formato produzir rapidamente.',
+    options:[
+      {l:'A', t:'Cruzou métricas de retenção/alcance com conversão e tomou a decisão com base nisso', s:4},
+      {l:'B', t:'Olhou só métricas de vaidade (curtidas, views) para decidir', s:1},
+      {l:'C', t:'Olhou os dados, mas a decisão final foi tomada por outro motivo', s:2},
+      {l:'D', t:'Não costuma revisitar os dados antes de planejar o próximo ciclo', s:1}
+    ]
+  },
+  {
+    id:'H6', title:'Construção de processo/sistema',
+    text:'Me conte sobre um processo (calendário, dashboard, fluxo de aprovação) que você criou ou melhorou por iniciativa própria, sem ninguém pedir.',
+    options:[
+      {l:'A', t:'Identificou uma ineficiência, criou o processo sozinha e documentou para o time', s:4},
+      {l:'B', t:'Só seguiu o processo que já existia, sem propor mudanças', s:2},
+      {l:'C', t:'Sugeriu a ideia, mas não chegou a implementar', s:2},
+      {l:'D', t:'Esperou o gestor pedir uma solução para o problema', s:1}
+    ]
+  }
+];
+
+const BEHAVIORAL_QUESTIONS = [
+  {
+    id:'S1', title:'Autonomia sem supervisão constante',
+    text:'Me conte sobre um período em que trabalhou com pouquíssima supervisão do seu gestor. Como se organizou?',
+    options:[
+      {l:'A', t:'Definiu prioridades sozinha com base nos objetivos do negócio e seguiu em frente', s:4},
+      {l:'B', t:'Sentiu falta de direção e produziu abaixo do esperado', s:2},
+      {l:'C', t:'Ficou parada esperando orientações claras antes de agir', s:1},
+      {l:'D', t:'Perguntou repetidamente ao gestor o que deveria fazer', s:1}
+    ]
+  },
+  {
+    id:'V3', title:'Intensidade e agilidade',
+    text:'Me conte sobre a última vez que você testou algo, errou rápido, e usou esse erro para aprender e ajustar antes de qualquer cobrança.',
+    options:[
+      {l:'A', t:'Testou, errou, identificou o padrão e corrigiu por conta própria e rapidamente', s:4},
+      {l:'B', t:'Testou, errou, e levou um bom tempo até perceber que precisava ajustar', s:2},
+      {l:'C', t:'Evitou testar para não correr o risco de errar', s:1},
+      {l:'D', t:'Errou, mas repetiu o mesmo erro depois em outra situação parecida', s:1}
+    ]
+  },
+  {
+    id:'V9', title:'Referências e influências',
+    text:'Quem é uma pessoa (perto de você ou pública) que você considera uma referência profissional? O que especificamente nessa pessoa te inspira?',
+    options:[
+      {l:'A', t:'Cita algo concreto e específico sobre comportamento/decisão dessa pessoa, não só admiração genérica', s:4},
+      {l:'B', t:'Cita a pessoa, mas de forma vaga ("é inteligente", "é um sucesso")', s:2},
+      {l:'C', t:'Tem dificuldade em identificar uma referência clara', s:1},
+      {l:'D', t:'Cita apenas referências de fama/status, sem conexão com valores de trabalho', s:1}
+    ]
+  },
+  {
+    id:'V10', title:'Referências e influências',
+    text:'Me conte sobre uma pessoa que te deu um feedback ou conselho que mudou a forma como você trabalha até hoje. O que aconteceu?',
+    options:[
+      {l:'A', t:'Traz uma história concreta, com o que mudou na prática depois disso', s:4},
+      {l:'B', t:'Lembra vagamente de ter recebido bons conselhos, sem detalhes de aplicação', s:2},
+      {l:'C', t:'Cita algo genérico tipo "sempre aprendo com todo mundo"', s:1},
+      {l:'D', t:'Não recorda de um momento assim', s:1}
+    ]
+  },
+  {
+    id:'S5', title:'Resolver sem escalar demais',
+    text:'Me conte sobre um problema que você resolveu sozinha, sem escalar para o gestor, mesmo tendo essa opção.',
+    options:[
+      {l:'A', t:'Avaliou que tinha contexto suficiente, resolveu e depois informou o gestor', s:4},
+      {l:'B', t:'Escalou por segurança, mesmo tendo condições de resolver sozinha', s:2},
+      {l:'C', t:'Resolveu, mas não avisou ninguém, mesmo sendo algo relevante', s:2},
+      {l:'D', t:'Não teve situação assim — sempre escalou tudo', s:1}
+    ]
+  },
+  {
+    id:'S6', title:'Adaptação a mudança abrupta de prioridade',
+    text:'Conte sobre uma vez em que as prioridades do seu trabalho mudaram de forma abrupta e sem muita explicação. Como reagiu?',
+    options:[
+      {l:'A', t:'Se adaptou rápido, reorganizou o que estava fazendo e manteve o foco em resultado', s:4},
+      {l:'B', t:'Ficou desmotivada, e isso afetou a entrega', s:1},
+      {l:'C', t:'Questionou bastante a mudança antes de aceitar seguir em frente', s:2},
+      {l:'D', t:'Continuou fazendo o que já estava fazendo, ignorando a nova prioridade', s:1}
+    ]
+  }
+];
+
+const ALL_QUESTIONS = [
+  ...HARD_QUESTIONS.map(q => ({...q, block:'hard'})),
+  ...BEHAVIORAL_QUESTIONS.map(q => ({...q, block:'behavioral'}))
+];
+
+// ---------------- STATE ----------------
+const answers = {}; // id -> {score, letter, timeSec}
+let interviewStart = null;
+let questionStartTime = null;
+let tickInterval = null;
+let finished = false;
+
+// ---------------- RENDER QUESTIONS ----------------
+function renderBlock(containerId, questions, offset){
+  const container = document.getElementById(containerId);
+  questions.forEach((q, idx) => {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.id = 'card-' + q.id;
+
+    const head = document.createElement('div');
+    head.className = 'qhead';
+    head.innerHTML = `
+      <div class="qnum">${offset + idx + 1}</div>
+      <div>
+        <div class="qtitle">${q.title}</div>
+        <div class="qtext">"${q.text}"</div>
+      </div>`;
+    card.appendChild(head);
+
+    const optWrap = document.createElement('div');
+    optWrap.className = 'options';
+    q.options.forEach(opt => {
+      const optEl = document.createElement('div');
+      optEl.className = 'opt';
+      optEl.id = 'opt-' + q.id + '-' + opt.l;
+      optEl.innerHTML = `<div class="letter">${opt.l}</div><div>${opt.t}</div>`;
+      optEl.addEventListener('click', () => selectAnswer(q, opt));
+      optWrap.appendChild(optEl);
+    });
+    card.appendChild(optWrap);
+    container.appendChild(card);
+  });
+}
+renderBlock('hardBlock', HARD_QUESTIONS, 0);
+renderBlock('behavioralBlock', BEHAVIORAL_QUESTIONS, HARD_QUESTIONS.length);
+
+// ---------------- ANSWER SELECTION ----------------
+function selectAnswer(q, opt){
+  if(finished) return;
+  const now = Date.now();
+  const timeSec = questionStartTime ? Math.round((now - questionStartTime)/1000) : 0;
+
+  answers[q.id] = { score: opt.s, letter: opt.l, timeSec: timeSec, title: q.title, block: q.block, text: q.text, optText: opt.t };
+
+  // update UI: clear other selections in this question
+  q.options.forEach(o => {
+    document.getElementById('opt-' + q.id + '-' + o.l).classList.remove('selected');
+  });
+  document.getElementById('opt-' + q.id + '-' + opt.l).classList.add('selected');
+  document.getElementById('card-' + q.id).classList.add('answered');
+
+  // reset the clock for next question
+  questionStartTime = now;
+  flashClock();
+  updateProgress();
+}
+
+function flashClock(){
+  const w = document.getElementById('clockWidget');
+  w.classList.add('flash');
+  setTimeout(() => w.classList.remove('flash'), 400);
+}
+
+function updateProgress(){
+  const count = Object.keys(answers).length;
+  document.getElementById('progressCount').textContent = count;
+  document.getElementById('progMini').textContent = count + '/11 respondidas';
+  document.getElementById('finalizeBtn').disabled = count < ALL_QUESTIONS.length;
+}
+
+// ---------------- CLOCK ----------------
+function fmt(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return m + ':' + s;
+}
+
+function tick(){
+  if(!interviewStart || finished) return;
+  const now = Date.now();
+  const segSec = (now - questionStartTime)/1000;
+  const totalSec = (now - interviewStart)/1000;
+  document.getElementById('segTime').textContent = fmt(segSec);
+  document.getElementById('totalTimeMini').textContent = fmt(totalSec);
+}
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  interviewStart = Date.now();
+  questionStartTime = Date.now();
+  document.getElementById('questionsFieldset').removeAttribute('disabled');
+  document.getElementById('startGate').style.display = 'none';
+  document.getElementById('clockWidget').classList.add('active');
+  tickInterval = setInterval(tick, 250);
+});
+
+// ---------------- FINALIZE ----------------
+document.getElementById('finalizeBtn').addEventListener('click', () => {
+  finished = true;
+  clearInterval(tickInterval);
+  const totalSec = (Date.now() - interviewStart)/1000;
+  renderResults(totalSec);
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+});
+
+function renderResults(totalSec){
+  const hardVals = HARD_QUESTIONS.map(q => answers[q.id]);
+  const behVals = BEHAVIORAL_QUESTIONS.map(q => answers[q.id]);
+
+  const hardScore = hardVals.reduce((a,v) => a + v.score, 0);
+  const behScore = behVals.reduce((a,v) => a + v.score, 0);
+  const hardMax = HARD_QUESTIONS.length * 4;
+  const behMax = BEHAVIORAL_QUESTIONS.length * 4;
+  const overallScore = hardScore + behScore;
+  const overallMax = hardMax + behMax;
+
+  const hardPct = Math.round((hardScore/hardMax)*100);
+  const behPct = Math.round((behScore/behMax)*100);
+  const overallPct = Math.round((overallScore/overallMax)*100);
+
+  document.getElementById('overallPct').textContent = overallPct + '%';
+  document.getElementById('hardPct').textContent = hardPct + '%';
+  document.getElementById('behPct').textContent = behPct + '%';
+  document.getElementById('hardBar').style.width = hardPct + '%';
+  document.getElementById('behBar').style.width = behPct + '%';
+
+  // verdict
+  const tag = document.getElementById('verdictTag');
+  let verdictClass, verdictLabel, narrative;
+  if(overallPct >= 85){
+    verdictClass = 'verdict-strong'; verdictLabel = 'Fit muito forte — avançar com prioridade';
+  } else if(overallPct >= 70){
+    verdictClass = 'verdict-strong'; verdictLabel = 'Fit forte — avançar';
+  } else if(overallPct >= 50){
+    verdictClass = 'verdict-medium'; verdictLabel = 'Fit moderado — aprofundar antes de decidir';
+  } else {
+    verdictClass = 'verdict-low'; verdictLabel = 'Fit baixo — não recomendado para este perfil';
+  }
+  tag.className = 'verdict-tag ' + verdictClass;
+  tag.textContent = verdictLabel;
+
+  // narrative
+  const diff = hardPct - behPct;
+  let profileLine;
+  if(overallPct >= 85){
+    profileLine = 'A candidata demonstrou, de forma consistente, um perfil autônomo, orientado a dados e com senso de dono sobre resultado — exatamente o padrão exigido para reportar diretamente ao CEO sem necessidade de supervisão próxima.';
+  } else if(overallPct >= 70){
+    profileLine = 'A candidata apresentou bons sinais de autonomia e orientação a dados, com respostas majoritariamente baseadas em ação própria e evidência. Vale validar os pontos de atenção listados abaixo antes da decisão final.';
+  } else if(overallPct >= 50){
+    profileLine = 'O padrão de respostas é misto: há evidências de iniciativa em alguns momentos, mas também sinais de dependência de direcionamento externo ou de decisões pouco baseadas em dados. Recomenda-se aprofundar nesses pontos antes de avançar.';
+  } else {
+    profileLine = 'O conjunto de respostas indica um perfil mais reativo e dependente de direcionamento do que autônomo e estratégico — um risco relevante para uma posição que reporta direto ao CEO e exige baixa necessidade de acompanhamento.';
+  }
+
+  if(Math.abs(diff) >= 20){
+    if(diff > 0){
+      profileLine += ' Vale notar que o desempenho técnico foi consideravelmente mais forte que o comportamental — sugerindo domínio de ferramentas e processos, mas possíveis lacunas em autonomia, adaptação ou postura diante de imprevistos.';
+    } else {
+      profileLine += ' Vale notar que o desempenho comportamental foi consideravelmente mais forte que o técnico — a postura e a autonomia parecem sólidas, mas pode haver lacunas práticas em dados, ferramentas ou processos que precisam ser desenvolvidas.';
+    }
+  }
+  document.getElementById('narrativeText').textContent = profileLine;
+
+  // strengths / attention (based on individual answers)
+  const strengths = ALL_QUESTIONS.filter(q => answers[q.id].score === 4);
+  const attention = ALL_QUESTIONS.filter(q => answers[q.id].score === 1);
+
+  const strengthsList = document.getElementById('strengthsList');
+  strengthsList.innerHTML = strengths.length
+    ? strengths.map(q => `<li>${q.title}</li>`).join('')
+    : '<li class="empty">Nenhuma resposta atingiu a pontuação máxima.</li>';
+
+  const attentionList = document.getElementById('attentionList');
+  attentionList.innerHTML = attention.length
+    ? attention.map(q => `<li>${q.title}</li>`).join('')
+    : '<li class="empty">Nenhum ponto crítico identificado.</li>';
+
+  // time table
+  const timeRows = document.getElementById('timeRows');
+  timeRows.innerHTML = ALL_QUESTIONS.map(q => {
+    const a = answers[q.id];
+    return `<div class="time-row"><span>${q.title}</span><span>${fmt(a.timeSec)}</span></div>`;
+  }).join('');
+  document.getElementById('totalTimeFinal').textContent = fmt(totalSec);
+}
+
+// ---------------- RESET ----------------
+document.getElementById('resetBtn').addEventListener('click', () => {
+  location.reload();
+});
+</script>
+</body>
+</html>
